@@ -1,21 +1,22 @@
 
 import { ApiProperty } from '@nestjs/swagger';
 
-interface Address {
-  street: string,
-  city: string,
-  country: string
-}
-
 export class CreateUserDto {
   @ApiProperty()
-  id: number;
+  username: string;
+
+  @ApiProperty()
+  password: string;
 
   @ApiProperty()
   name: string;
 
   @ApiProperty()
-  address: Address;
+  adress: string;
+
+
+  @ApiProperty()
+  cityId: number;
 
 //   @ApiProperty({ enum: RoleEnum, default: [], isArray: true })
 //   roles: RoleEnum[] = [];
