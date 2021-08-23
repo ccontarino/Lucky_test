@@ -1,27 +1,29 @@
 import { Module } from '@nestjs/common';
-
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './User/user.module';
-import { SequelizeModule } from '@nestjs/sequelize';
 import { UserController } from './User/user.controller';
-// import { databaseProviders } from './database/database.providers';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
-// import { User } from './database/model/user.model'
+import { UserService } from './User/user.service';
+import { DatabaseModule } from './database/database.module';
+import { User } from './User/user.entity';
+import { Connection } from 'typeorm';
+
 @Module({
   imports: [
-    SequelizeModule.forRoot({
-      dialect: 'mysql',
+    TypeOrmModule.forRoot({
+      type: 'mysql',
       host: 'localhost',
       port: 3306,
       username: 'root',
       password: 'admin',
       database: 'AppIndex',
-      autoLoadModels: true,
+      entities: [User],
       synchronize: true,
-      models: [],
-    }),
+    }), UserModule
   ],
   controllers: [UserController],
-  providers: [UserModule],
+  providers: [UserService],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private connection: Connection) { }
+
+}
