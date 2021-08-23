@@ -1,4 +1,3 @@
-
 import { ApiProperty } from '@nestjs/swagger';
 
 interface Address {
@@ -17,9 +16,9 @@ export class CreateUserDto {
   @ApiProperty()
   address: Address;
 
-//   @ApiProperty({ enum: RoleEnum, default: [], isArray: true })
-//   roles: RoleEnum[] = [];
+  //   @ApiProperty({ enum: RoleEnum, default: [], isArray: true })
+  //   roles: RoleEnum[] = [];
 
-//   @ApiProperty({ required: false, default: true })
-//   isEnabled?: boolean = true;
-// }
+  //   @ApiProperty({ required: false, default: true })
+  //   isEnabled?: boolean = true;
+}
