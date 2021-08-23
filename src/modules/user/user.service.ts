@@ -22,10 +22,6 @@ export class UserService implements IUserService {
       throw new ConflictException('Username is already taken.');
     }
 
-    // if (await this.emailIsTaken(user.email)) {
-    //   throw new ConflictException('Email address is already taken.');
-    // }
-
     const passwordHash = await this.authService.hashPassword(user.password);
     user.password = passwordHash;
 
@@ -44,14 +40,5 @@ export class UserService implements IUserService {
     return true;
   }
 
-  private async emailIsTaken(email: string): Promise<boolean> {
-    // const user = await this.userRepository.findUserByEmail(email);
-
-    // if (user === undefined) {
-    //   return false;
-    // }
-
-    return true;
-  }
 
 }
