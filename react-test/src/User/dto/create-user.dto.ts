@@ -6,7 +6,7 @@ interface Address {
   country: string
 }
 
-export class CreateUserDto {
+export class CreateUserDTO {
   @ApiProperty()
   id: number;
 
