@@ -15,8 +15,8 @@ export class UserController {
 
   @Post()
   public async signUp(@Body() user: RegisterUserDto): Promise<UserDto> {
-    const createdUser = await this.userServive.signUp(user);
 
+    const createdUser = await this.userServive.signUp(user);
     return createdUser;
   }
 

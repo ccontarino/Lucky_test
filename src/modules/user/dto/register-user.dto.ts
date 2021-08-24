@@ -1,4 +1,6 @@
-import { IsEmail, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsEmail, IsOptional, IsString, IsNumber, ValidateNested } from 'class-validator';
+import { AddressDTO } from './addres.dto';
 
 export class RegisterUserDto {
 
@@ -7,12 +9,10 @@ export class RegisterUserDto {
 
   @IsString()
   public password: string;
-
-
   @IsString()
   public address: string;
 
-  @IsString()
-  public cityId: string;
+  @IsNumber()
+  public cityId: number;
 
 }

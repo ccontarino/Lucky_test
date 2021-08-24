@@ -28,6 +28,7 @@ export class UserRepository implements IUserRepository {
   public async createUser(user: RegisterUserDto): Promise<UserDto> {
     const userEntity = this.userRepository.create(user);
     const createdUserEntity = await this.userRepository.save(userEntity);
+    console.log("createdUserEntity", createdUserEntity);
     const createdUser = plainToClass(UserDto, createdUserEntity);
 
     return createdUser;
