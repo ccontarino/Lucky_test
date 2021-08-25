@@ -15,12 +15,6 @@ export class UserController {
 
   }
 
-  public async logIn(@Body() user: RegisterUserDto): Promise<string> {
-
-    const createdUser = await this.userServive.logIn(user);
-    return "lala"
-  }
-
 
   @Post()
   public async signUp(@Body() user: RegisterUserDto): Promise<UserDto> {
