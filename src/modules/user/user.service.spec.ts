@@ -88,7 +88,6 @@ describe('UserService', () => {
     };
 
     jest.spyOn(userRepository, 'createUser').mockReturnValue(Promise.resolve(createdUser));
-    jest.spyOn(userRepository, 'findUserByEmail').mockReturnValue(Promise.resolve(undefined));
     jest.spyOn(userRepository, 'findUserByUsername').mockReturnValue(Promise.resolve(undefined));
     jest.spyOn(authService, 'hashPassword').mockReturnValue(Promise.resolve('password hash'));
 
