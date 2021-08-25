@@ -1,10 +1,11 @@
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
-import { Transaction } from 'typeorm';
-
+import { getConnection, Transaction } from 'typeorm';
 import { AUTH_SERVICE, IAuthService } from '../auth';
 import { USER_REPOSITORY } from './constants';
 import { IUserRepository, IUserService } from './contracts';
 import { RegisterUserDto, UserDto } from './dto';
+import { User } from './entities';
+import { Profile } from './entities/profile.entity';
 
 @Injectable()
 export class UserService implements IUserService {
@@ -18,22 +19,35 @@ export class UserService implements IUserService {
     this.authService = authService;
   }
 
+  findOne(username: string): Promise<UserDto | undefined> {
 
-  @Transaction()
-  public async createUserEntities(user: RegisterUserDto) {
-    try {
-      const createdUser = await this.userRepository.createUser(user);
-      const createdProfile = await this.userRepository.createUserProfile(createdUser);
-      //return createdUser;
-    } catch (error) {
-      throw new ConflictException('user can not be save');
-    }
+    return this.userRepository.findUserByUsername(username);
 
   }
 
+
+  // @Transaction()
+  // public async createUserEntities(user: RegisterUserDto) {
+  //   try {
+  //     const createdUser = await this.userRepository.createUser(user);
+  //     const response = await getConnection()
+  //       .createQueryBuilder()
+  //       .insert()
+  //       .into(Profile)
+  //       .values([
+  //         { user: createdUser.id, address: { street: user.address } },
+  //       ])
+  //       .execute();
+
+  //     return createdUser;
+  //   } catch (error) {
+  //     throw new ConflictException('user can not be save');
+  //   }
+  // }
+
+  @Transaction()
   public async signUp(user: RegisterUserDto): Promise<UserDto> {
 
-    console.log("que pasa aca singup", user)
     if (await this.usernameIsTaken(user.username)) {
       throw new ConflictException('Username is already taken.');
     }
@@ -41,12 +55,22 @@ export class UserService implements IUserService {
     const passwordHash = await this.authService.hashPassword(user.password);
     user.password = passwordHash;
 
-    await this.createUserEntities(user);
-    //  const createdUser = await this.userRepository.createUser(user);
-    //  const createdProfile = await this.userRepository.createUserProfile(createdUser);
+    let createdUser;
+    try {
+      createdUser = await this.userRepository.createUser(user);
+      const response = await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(Profile)
+        .values([
+          { user: createdUser.id, address: { street: user.address } },
+        ])
+        .execute();
+      return createdUser;
+    } catch (error) {
+      throw new ConflictException('user can not be save');
+    }
 
-    //console.log(created user,createdUser);
-    return createdProfile;
   }
 
   private async usernameIsTaken(username: string): Promise<boolean> {

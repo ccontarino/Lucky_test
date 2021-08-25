@@ -1,12 +1,12 @@
 import { Exclude, Expose } from 'class-transformer';
 
-export class UserDto {
+export class ProfileDto {
 
   @Expose()
   public id: string;
 
   @Expose()
-  public username: string;
+  public userid: string;
 
   @Expose()
   public address: string;
