@@ -14,7 +14,7 @@ export class UserService implements IUserService {
   private authService: IAuthService;
 
   constructor(@Inject(USER_REPOSITORY) userRepository: IUserRepository,
-              @Inject(AUTH_SERVICE) authService: IAuthService) {
+    @Inject(AUTH_SERVICE) authService: IAuthService) {
     this.userRepository = userRepository;
     this.authService = authService;
   }
@@ -24,25 +24,6 @@ export class UserService implements IUserService {
     return this.userRepository.findUserByUsername(username);
 
   }
-
-  // @Transaction()
-  // public async createUserEntities(user: RegisterUserDto) {
-  //   try {
-  //     const createdUser = await this.userRepository.createUser(user);
-  //     const response = await getConnection()
-  //       .createQueryBuilder()
-  //       .insert()
-  //       .into(Profile)
-  //       .values([
-  //         { user: createdUser.id, address: { street: user.address } },
-  //       ])
-  //       .execute();
-
-  //     return createdUser;
-  //   } catch (error) {
-  //     throw new ConflictException('user can not be save');
-  //   }
-  // }
 
   @Transaction()
   public async signUp(user: RegisterUserDto): Promise<UserDto> {

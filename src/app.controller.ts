@@ -7,7 +7,6 @@ import { LocalAuthGuard } from './modules/auth/local-auth-guard';
 
 @Controller()
 export class AppController {
-  // constructor(private readonly appService: AppService) { }
   constructor(private authService: AuthService) { }
 
   @UseGuards(LocalAuthGuard)

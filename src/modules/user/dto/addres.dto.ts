@@ -8,9 +8,6 @@ export class AddressDTO {
   @Expose()
   public street: string;
 
-  // @Expose()
-  // public country: CountryDTO;
-
   @Expose()
   public cityId: number;
 

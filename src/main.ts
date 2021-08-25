@@ -1,7 +1,4 @@
-// It is crucial that the following global variables are set BEFORE anything
-// else is imported!
-// Normally it would not matter to the TypeScript compiler but node-ts and
-// Webpack are having difficulties when globals are not defined first.
+
 import path from 'path';
 import { ConfigService } from './config.service';
 
