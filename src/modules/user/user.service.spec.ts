@@ -14,9 +14,6 @@ function createMockUserRepository(): IUserRepository {
       throw new Error('Unmocked method called.');
     },
 
-    findUserByEmail: (email: string): Promise<UserDto | undefined> => {
-      throw new Error('Unmocked method called.');
-    },
 
     createUser: (user: RegisterUserDto): Promise<UserDto> => {
       throw new Error('Unmocked method called.');
