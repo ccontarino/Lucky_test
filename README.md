@@ -31,3 +31,8 @@ $ npm run test
 The folder database contains all tables and data of database AppIndex
 for example database/database.sql 
 ```
+
+#docker database
+The folder scripts contains docker_start_mysql
+which you can run the database with docker.
+``
