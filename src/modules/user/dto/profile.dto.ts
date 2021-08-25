@@ -17,5 +17,4 @@ export class ProfileDto {
   @Exclude()
   public password: string;
 
-
 }

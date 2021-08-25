@@ -5,7 +5,6 @@ import { USER_REPOSITORY } from './constants';
 import { IUserRepository, IUserService } from './contracts';
 import { RegisterUserDto, UserDto } from './dto';
 import { UserPasswordDto } from './dto/UserPassword.dto';
-import { User } from './entities';
 import { Profile } from './entities/profile.entity';
 
 @Injectable()
@@ -15,17 +14,16 @@ export class UserService implements IUserService {
   private authService: IAuthService;
 
   constructor(@Inject(USER_REPOSITORY) userRepository: IUserRepository,
-    @Inject(AUTH_SERVICE) authService: IAuthService) {
+              @Inject(AUTH_SERVICE) authService: IAuthService) {
     this.userRepository = userRepository;
     this.authService = authService;
   }
 
-  findOne(username: string): Promise<UserDto | undefined> {
+  public findOne(username: string): Promise<UserDto | undefined> {
 
     return this.userRepository.findUserByUsername(username);
 
   }
-
 
   // @Transaction()
   // public async createUserEntities(user: RegisterUserDto) {
@@ -74,7 +72,6 @@ export class UserService implements IUserService {
 
   }
 
-
   @Transaction()
   public async logIn(user: UserPasswordDto): Promise<string> {
 
@@ -89,8 +86,7 @@ export class UserService implements IUserService {
       throw new ConflictException(error);
     }
 
-
-    return "token"
+    return 'token';
 
   }
 
@@ -108,11 +104,10 @@ export class UserService implements IUserService {
     const user = await this.userRepository.findUserByUsername(username);
 
     if (user === undefined) {
-      throw new ConflictException("user dosen't exist");
+      throw new ConflictException('user dosen\'t exist');
     }
 
     return user;
   }
-
 
 }

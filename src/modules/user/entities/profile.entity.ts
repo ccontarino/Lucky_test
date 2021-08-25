@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, PrimaryColumn, ManyToOne } from 'typeorm';
-import { User } from './user.entity';
+import { Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Address } from './address.entity';
+import { User } from './user.entity';
 
 @Entity()
 export class Profile {
@@ -8,9 +8,9 @@ export class Profile {
   @PrimaryGeneratedColumn()
   public Id: number;
 
-  @ManyToOne(type => User, user => user.Id)
-  public user: number
+  @ManyToOne((type) => User, (user) => user.Id)
+  public user: number;
 
-  @ManyToOne(type => Address, address => address.Id)
-  public address: Address
+  @ManyToOne((type) => Address, (address) => address.Id)
+  public address: Address;
 }

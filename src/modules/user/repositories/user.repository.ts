@@ -2,10 +2,10 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { plainToClass } from 'class-transformer';
-import { getConnection, Repository, Transaction } from 'typeorm';
+import { getConnection, Repository } from 'typeorm';
 
 import { IUserRepository } from '../contracts';
-import { RegisterUserDto, UserDto, ProfileDto } from '../dto';
+import { RegisterUserDto, UserDto } from '../dto';
 import { Profile, User } from '../entities';
 
 @Injectable()
@@ -44,10 +44,7 @@ export class UserRepository implements IUserRepository {
     }
     // console.log("createdUserEntity", createdUserEntity);
 
-
-
   }
-
 
   // public async createUserProfile(userProfile: RegisterUserDto): Promise<ProfileDto> {
   //   const userEntity = this.userRepository.create(userProfile);

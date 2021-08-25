@@ -2,21 +2,20 @@ import { Injectable } from '@nestjs/common';
 
 import bcrypt from 'bcrypt';
 
-import { IAuthService } from './contracts';
-import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
-
+import { UserService } from '../user/user.service';
+import { IAuthService } from './contracts';
 
 @Injectable()
 export class AuthService implements IAuthService {
-  constructor(
-    private usersService: UserService,
-    private jwtService: JwtService
-  ) { }
 
   private readonly bcryptRounds: number = 12;
+  constructor(
+    private usersService: UserService,
+    private jwtService: JwtService,
+  ) { }
 
-  async validateUser(username: string, pass: string): Promise<any> {
+  public async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(username);
     if (user && user.password === pass) {
       const { password, ...result } = user;
@@ -30,7 +29,7 @@ export class AuthService implements IAuthService {
 
     return hashedPassword;
   }
-  async login(user: any) {
+  public async login(user: any) {
     const payload = { username: user.username, password: user.password };
     return {
       access_token: this.jwtService.sign(payload),

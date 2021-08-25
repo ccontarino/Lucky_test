@@ -1,5 +1,4 @@
 import { RegisterUserDto, UserDto } from '../dto';
-import { User } from '../entities';
 
 export interface IUserRepository {
   findUserByUsername(username: string): Promise<UserDto | undefined>;

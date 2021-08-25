@@ -1,5 +1,4 @@
-import { Exclude, Expose } from 'class-transformer';
-import { CountryDTO } from './country.dto';
+import { Expose } from 'class-transformer';
 
 export class AddressDTO {
 
@@ -14,7 +13,5 @@ export class AddressDTO {
 
   @Expose()
   public cityId: number;
-
-
 
 }

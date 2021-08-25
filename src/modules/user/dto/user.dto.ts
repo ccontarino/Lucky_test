@@ -17,5 +17,4 @@ export class UserDto {
   @Exclude()
   public password: string;
 
-
 }

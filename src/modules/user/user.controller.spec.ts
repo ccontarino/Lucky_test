@@ -11,7 +11,7 @@ describe('User Controller', () => {
   let userService: IUserService;
 
   beforeEach(async () => {
-    userService = <IUserService>{};
+    userService = <IUserService> {};
 
     const userServiceProvider: ValueProvider = {
       provide: USER_SERVICE,
@@ -33,19 +33,19 @@ describe('User Controller', () => {
   it('should sign up the user', async () => {
     const userServiceSignUpReturnValue: UserDto = {
       id: 1,
-      address: "calle falsa",
+      address: 'calle falsa',
       password: 'secret',
       username: 'john.doe',
-      cityId: "1"
+      cityId: '1',
 
     };
     userService.signUp = jest.fn().mockResolvedValue(userServiceSignUpReturnValue);
 
     const userToRegister: RegisterUserDto = {
-      address: "calle falsa",
+      address: 'calle falsa',
       password: 'secret',
       username: 'john.doe',
-      cityId: 1
+      cityId: 1,
     };
     const registeredUser = await userController.signUp(userToRegister);
 

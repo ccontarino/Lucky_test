@@ -1,6 +1,4 @@
-import { UseGuards } from '@nestjs/common';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
-import { LocalAuthGuard } from '../auth/local-auth-guard';
 import { USER_SERVICE } from './constants';
 import { IUserService } from './contracts';
 import { RegisterUserDto, UserDto } from './dto';
@@ -14,7 +12,6 @@ export class UserController {
     this.userServive = userServive;
 
   }
-
 
   @Post()
   public async signUp(@Body() user: RegisterUserDto): Promise<UserDto> {

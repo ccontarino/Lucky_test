@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, PrimaryColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
-import { City } from "./city.entity";
+import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { City } from './city.entity';
 @Entity()
 export class Address {
 
@@ -7,10 +7,8 @@ export class Address {
   @PrimaryGeneratedColumn()
   public Id: number;
 
-
-  @ManyToOne(type => City, city => city.Id) // note: we will create author property in the Photo class below
+  @ManyToOne((type) => City, (city) => city.Id) // note: we will create author property in the Photo class below
   public cityId: City;
-
 
   @Column()
   public street: string;

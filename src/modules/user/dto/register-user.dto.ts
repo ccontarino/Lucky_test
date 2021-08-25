@@ -1,6 +1,4 @@
-import { Type } from 'class-transformer';
-import { IsEmail, IsOptional, IsString, IsNumber, ValidateNested } from 'class-validator';
-import { AddressDTO } from './addres.dto';
+import { IsNumber, IsString } from 'class-validator';
 
 export class RegisterUserDto {
 
