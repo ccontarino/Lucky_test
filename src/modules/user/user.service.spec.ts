@@ -67,19 +67,12 @@ describe('UserService', () => {
 
   it('should sign up the user', async () => {
     const userToBeCreated = {
-      email: 'john.doe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
       password: 'secret',
       username: 'johndoe',
     };
 
     const createdUser = {
       id: '50da10a8-f77c-4fc4-bf53-f9d9b52e2df0',
-      aboutMe: null,
-      email: 'john.doe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
       password: 'secret',
       username: 'johndoe',
     };
@@ -93,17 +86,12 @@ describe('UserService', () => {
 
   it('should say the username is already taken', async () => {
     const userToBeCreated = {
-      email: 'john.doe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
       password: 'secret',
       username: 'johndoe',
     };
 
     const existingUser = {
       id: '50da10a8-f77c-4fc4-bf53-f9d9b52e2df0',
-      aboutMe: null,
-      email: 'john.doe@example.com',
       firstName: 'John',
       lastName: 'Doe',
       password: 'secret',
@@ -141,14 +129,12 @@ describe('UserService', () => {
     };
 
     jest.spyOn(userRepository, 'findUserByUsername').mockReturnValue(Promise.resolve(undefined));
-    jest.spyOn(userRepository, 'findUserByEmail').mockReturnValue(Promise.resolve(existingUser));
 
     try {
       await userService.signUp(userToBeCreated);
       fail();
     } catch (error) {
       expect(error).toBeInstanceOf(ConflictException);
-      expect(error.message.message).toBe('Email address is already taken.');
     }
   });
 });
