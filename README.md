@@ -1,31 +1,31 @@
 ## Installation
 
 ```bash
-$ npm install
+$ npm install or yarn install
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ npm run start or yarn run start
 
 # watch mode
-$ npm run start:dev
+$ npm run start:dev or yarn run start:dev
 
 # incremental rebuild (webpack)
-$ npm run webpack
-$ npm run start:hmr
+$ npm run webpack or yarn run webpack
+$ npm run start:hmr or yarn run start:hmr
 
 # production mode
-$ npm run start:prod
+$ npm run start:prod or yarn run start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ npm run test or yarn run test
 
 #script database
 The folder database contains all tables and data of database AppIndex
