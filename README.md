@@ -27,9 +27,7 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+#script database
+The folder database contains all tables and data of database AppIndex
+for example database/database.sql 
 ```
