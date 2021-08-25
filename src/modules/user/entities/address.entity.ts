@@ -7,7 +7,7 @@ export class Address {
   @PrimaryGeneratedColumn()
   public Id: number;
 
-  @ManyToOne((type) => City, (city) => city.Id) // note: we will create author property in the Photo class below
+  @ManyToOne((type) => City, (city) => city.Id)
   public cityId: City;
 
   @Column()
