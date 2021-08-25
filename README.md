@@ -36,3 +36,9 @@ for example database/database.sql
 ```The folder scripts contains docker_start_mysql
 which you can run the database with docker.
 ```
+
+test was made with conventional commits 
+```
+you can reed more in 
+https://www.conventionalcommits.org/en/v1.0.0/
+```
