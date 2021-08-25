@@ -32,22 +32,20 @@ describe('User Controller', () => {
 
   it('should sign up the user', async () => {
     const userServiceSignUpReturnValue: UserDto = {
-      id: 'user-id',
-      email: 'john.doe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
+      id: 1,
+      address: "calle falsa",
       password: 'secret',
       username: 'john.doe',
-      aboutMe: null,
+      cityId: "1"
+
     };
     userService.signUp = jest.fn().mockResolvedValue(userServiceSignUpReturnValue);
 
     const userToRegister: RegisterUserDto = {
-      email: 'john.doe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
+      address: "calle falsa",
       password: 'secret',
       username: 'john.doe',
+      cityId: 1
     };
     const registeredUser = await userController.signUp(userToRegister);
 

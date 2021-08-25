@@ -4,6 +4,7 @@ import { AUTH_SERVICE, IAuthService } from '../auth';
 import { USER_REPOSITORY } from './constants';
 import { IUserRepository, IUserService } from './contracts';
 import { RegisterUserDto, UserDto } from './dto';
+import { UserPasswordDto } from './dto/UserPassword.dto';
 import { User } from './entities';
 import { Profile } from './entities/profile.entity';
 
@@ -48,7 +49,7 @@ export class UserService implements IUserService {
   @Transaction()
   public async signUp(user: RegisterUserDto): Promise<UserDto> {
 
-    if (await this.usernameIsTaken(user.username)) {
+    if (await this.usernameExist(user.username)) {
       throw new ConflictException('Username is already taken.');
     }
 
@@ -58,7 +59,7 @@ export class UserService implements IUserService {
     let createdUser;
     try {
       createdUser = await this.userRepository.createUser(user);
-      const response = await getConnection()
+      await getConnection()
         .createQueryBuilder()
         .insert()
         .into(Profile)
@@ -73,7 +74,27 @@ export class UserService implements IUserService {
 
   }
 
-  private async usernameIsTaken(username: string): Promise<boolean> {
+
+  @Transaction()
+  public async logIn(user: UserPasswordDto): Promise<string> {
+
+    try {
+      const userDatabase: UserDto = await this.userNameExist(user.username);
+      const passwordHash = await this.authService.hashPassword(user.password);
+      user.password = passwordHash;
+      if (user.password !== userDatabase.password) {
+        throw new ConflictException('incorrect username/password');
+      }
+    } catch (error) {
+      throw new ConflictException(error);
+    }
+
+
+    return "token"
+
+  }
+
+  private async usernameExist(username: string): Promise<boolean> {
     const user = await this.userRepository.findUserByUsername(username);
 
     if (user === undefined) {
@@ -81,6 +102,16 @@ export class UserService implements IUserService {
     }
 
     return true;
+  }
+
+  private async userNameExist(username: string): Promise<UserDto> {
+    const user = await this.userRepository.findUserByUsername(username);
+
+    if (user === undefined) {
+      throw new ConflictException("user dosen't exist");
+    }
+
+    return user;
   }
 
 
